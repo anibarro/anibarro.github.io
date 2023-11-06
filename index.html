@@ -1,0 +1,101 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Calculator</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/exif-js"></script>
+  <script src="https://unpkg.com/interactjs/dist/interact.min.js"></script>
+  <style>
+    .preview-img {
+      user-drag: none;  
+      user-select: none;
+      -moz-user-select: none;
+      -webkit-user-drag: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      max-width: 100%;
+    }
+    .resize-drag {
+      position: absolute;
+      width: 50%;
+      height: 50%;
+      padding: 20px;
+      margin: 0;
+      background-color: #2299ee;
+      color: white;
+      font-size: 20px;
+      font-family: sans-serif;
+      opacity: 0.6;
+      touch-action: none;
+      white-space: nowrap;
+      box-sizing: border-box;
+      text-shadow:
+      1px 1px 0 #000,
+      -1px 1px 0 #000,
+      -1px -1px 0 #000,
+      1px -1px 0 #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-3">
+    <div class="row mb-4 justify-content-center">
+      <div class="col-md-12 mt-3 mt-md-0">
+        <h2>Crop info</h2>
+        <p>Select a full—not cropped—image from your device and resize/drag the box around to get an aproximate value in mega pixels and equivalent focal length for that crop in 35mm.</p>
+        <div class="mb-3">
+          <input type="file" name="custom_file" id="custom_file">
+        </div>
+
+        <div class="mb-3">
+          <div style="position: relative;background-color: #dee2e6;">
+            <img id="full-image" class="invisible preview-img" alt="your img" >
+            <div id="crop_box" class="resize-drag invisible" style="transform: translate(0px, 0px);" data-x="0" data-y="0"></div> 
+          </div>
+        </div>
+
+        <div class="row">
+          <label for="aspect_ratio" class="col-sm-4 col-form-label">Aspect ratio</label>
+          <div class="col-sm-12 mb-4">
+            <select class="form-control" id="aspect_ratio" name="aspect_ratio">
+              <option value="0">Original</option>
+              <option value="1">1:1</option>
+              <option value="1.25">5:4</option>
+              <option value="1.333333333333333">4:3</option>
+              <option value="1.5">3:2</option>
+              <option value="1.777777777777778">16:9</option>
+              <option value="1.91">1.91:1</option>
+              <option value="2">2:1</option>
+              <option value="2.33">21:9</option>
+              <option value="2.39">2.39:1</option>
+              <option value="3.555555555555555">32:9</option>
+            </select>
+          </div>
+
+          <div class="col-sm-12 mb-4">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="portrait">
+              <label class="form-check-label" for="portrait">
+                Rotate
+              </label>
+            </div>
+          </div>
+
+          <div class="col-sm-12 mb-4">
+              <label for="exampleColorInput" class="form-label">Crop window color</label>
+              <input type="color" class="form-control form-control-color" id="crop_color" value="#2299ee" title="Choose your color">
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('a 1E=$(\'#1B-1F\');a l=$(\'#l\');l.M("1R","34");a 1n=$("#1n");a Y=0;a U=0;a S=0;a L=0;a K=0;a G=0;a 14=0;a R=0;a O=0;a 12=1;a u=1W;a 1d=26;a p=1;a 1x=0;a 15=0;a 1y=0;D 1k=J.v.1I({2t:1,2K:j,v:[J.v.2I({2G:{q:10,F:10},2F:\'1r\'}),J.v.2D({2v:\'1r\',2o:j}),],});$("#2B").11(d(e){l.M("2E-32",$(k).2c())});$("#p").11(d(e){19()});$("#31").11(d(e){1d=$(k).30(\'2Z\');19()});d 1I(){o p};d 1o(x,y,w,h){Y=((w*h)/2S).1t(2)+" 2W";a 1g=(G/w);a 1z=(14/h);a 1N=1g*u;a 1T=1z*u;U=(t.X(1N)+"1w ("+(1g*((u/15))).1t(2)+"x)");S=(t.X(1T)+"1w ("+(1z*((u/15))).1t(2)+"x)")};d 1Q(B){G=B.2Q;14=B.2R;R=$(B).q();O=$(B).F();a 23=$(B).q();12=G/23;1x=R/O};1n.2T("11",d(c){a 1p=33.2O(\'1B-1F\');1p.2Y=d(){a 1Z=k;g.2M(c.b.1S[0],d(){a 28=g.i(k,"2N");a 22=g.i(k,"2L");a 21=g.i(k,"2w");a 1Y=g.i(k,"2x");a 1s=g.i(k,"2y");15=g.i(k,"1M");a 1v=g.i(k,"2A");1E.1D("1O");l.1D("1O");1Q(1Z);u=13 1s!=="16"?1s:20(k);19().18(r=>27());1V.1U(`${28}${22},${21}s f${1Y}${u}1w 1v${1v}`);1V.1U(g.3n(k))})};1p.3u=3t.3s(c.b.1S[0])});d 27(){l.1P("n-x",R/4);l.1P("n-y",-O);o A().18(d(r){l.M("q","1W%");o A().18(d(r){a m=K+\'\\2i\'+L;m+="<z>"+Y;m+="<z> H.1X: "+U;m+="<z> V.1X: "+S;l.2m(m);l.M("1R","3m");o r})})};d 20(e){D 1L=36;D 3j=24;D 1f=g.i(e,"3i");a 1m=13 1f!=="16"&&1f===3?j:26;a 1G=g.i(e,"35");a 1K=g.i(e,"3e");a 1j=g.i(e,"3d");a 1l=g.i(e,"3c");a 1H=13 1j!=="16"?1j:G;a 1J=13 1l!=="16"?1l:14;a 1C=(1H/1G)*(1m?10:25.4);a 39=(1J/1K)*(1m?10:25.4);a 2a=g.i(e,"1M");1y=29(1L/1C);a 2q=1y*2a;o 2r(2q)}d 29(I){a 2u=[6,5.6,4.8,4.6,4.5,3.9,2.7,1.3o,2,1.7,1.6,1.5,1.3,1,0.3k,0.3l];a 1a=2u.38(d(1e,1i){o(t.1c(1i-I)<t.1c(1e-I)?1i:1e)});D 2j=0.3a;1h(t.1c(1a-I)>2j)1a=I;o 1a};d 1b(c){a b=c.b;a x=(T(b.Z(\'n-x\'))||0)+c.3b;a y=(T(b.Z(\'n-y\'))||0)+c.3g;b.N.2h=\'2b(\'+x+\'E, \'+y+\'E)\';b.Q(\'n-x\',x);b.Q(\'n-y\',y);a W=c.C.q;a P=c.C.F;1o(x,y,W,P)};1q.1b=1b;D 17=J(\'#l\');17.3h({2n:{1u:j,37:j,2l:j,2g:j},2p:{2e(c){a b=c.b;a x=(T(b.Z(\'n-x\'))||0);a y=(T(b.Z(\'n-y\'))||0);b.N.q=c.C.q+\'E\';b.N.F=c.C.F+\'E\';x+=c.2f.1u;y+=c.2f.2g;b.N.2h=\'2b(\'+x+\'E,\'+y+\'E)\';b.Q(\'n-x\',x);b.Q(\'n-y\',y);a W=c.C.q;a P=c.C.F;K=t.X(W*12);L=t.X(P*12);1o(x,y,K,L);a m=K+\'\\2i\'+L;m+="<z>"+Y;m+="<z>3p 3r";m+="<z> H: "+U;m+="<z> V: "+S;$(b).2m(m)}},v:[1k,],3w:\'3v\',2s:j}).3q({2p:{3f(c){},2e:1q.1b},2s:j,v:[J.v.2J({2H:\'1r\',2o:j})]});d A(){o 17.A({2k:\'2d\',2n:{1u:j,2l:j}}).18(r=>17.A({2k:"2z",2X:\'2V\'}))};1q.2U(\'2d\',A);d 19(){a e=$("#p");a 1A=$(e).2c();1h(1A==="0"){p=1x}2P{p=2r(1A)}1h(1d){p=(1/p)}1k.2C.2t=p;o A()};',62,219,'||||||||||var|target|event|function|||EXIF||getTag|true|this|crop_box|content|data|return|aspect_ratio|width|||Math|lensFocalLength|modifiers||||br|reflow|img|rect|const|px|height|effective_image_width||value|interact|crop_width|crop_height|css|style|image_height|rect_height|setAttribute|image_width|h_mm_v|parseFloat|h_mm_h||rect_width|round|h_mp|getAttribute||change|resize_factor|typeof|effective_image_height|original_focal_length|undefined|box|then|updateAspectRatio|actual_factor|dragMoveListener|abs|portrait_mode|prev|res_units|h_crop|if|curr|xpix|preserveRatio|ypix|res_in_cm|custom_file|updateHiddenInputs|output|window|parent|focal35|toFixed|left|ISO|mm|original_aspect_ratio|camera_crop_factor|v_crop|tmp_ratio|full|h_mm|removeClass|bg_image|image|xres|sensor_res_x|aspectRatio|sensor_res_y|yres|width_35mm|FocalLength|eq_w|invisible|attr|initVars|visibility|files|eq_h|log|console|50|FOV|aperture|that|getFullFrameEquivalentFocalLength|exposure|model|display_w|||false|boxReposition|make|getMappedCropFactor|focal|translate|val|resize|move|deltaRect|top|transform|u00D7|threshold|name|bottom|html|edges|endOnly|listeners|equivalent_focal|Number|inertia|ratio|factors|outer|ShutterSpeedValue|ApertureValue|FocalLengthIn35mmFilm|drag|ISOSpeedRatings|crop_color|options|restrictEdges|background|max|min|restriction|restrictSize|restrictRect|enabled|Model|getData|Make|getElementById|else|naturalWidth|naturalHeight|1000000|on|addEventListener|xz|MP|axis|onload|checked|prop|portrait|color|document|hidden|FocalPlaneXResolution||right|reduce|v_mm|05|dx|PixelYDimension|PixelXDimension|FocalPlaneYResolution|start|dy|resizable|FocalPlaneResolutionUnit|height_35mm|79|64|visible|getAllTags|84|Focal|draggable|length|createObjectURL|URL|src|none|invert'.split('|'),0,{}))
+  </script>
+</body>
+</html>
