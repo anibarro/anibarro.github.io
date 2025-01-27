@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programador citas dentista</title>
+    <link href="https://npmcdn.com/flatpickr/dist/flatpickr.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"],
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #results {
+            font-size: 16px;
+            margin-top: 20px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 4px;
+        }
+
+        #calendar {
+            margin-top: 20px;
+        }
+
+        .highlight-start {
+            background-color: #28a745 !important;
+            color: white !important;
+        }
+
+        .highlight-range {
+            background-color: #ffc107 !important;
+            color: black !important;
+        }
+
+        .flatpickr-calendar.inline{
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Programador citas dentista</h1>
+
+        <div class="form-group">
+            <label for="numTreatments">Número de correctores:</label>
+            <input type="number" id="numTreatments" min="1" value="5">
+        </div>
+
+        <div class="form-group">
+            <label for="daysPerTreatment">Días por corrector:</label>
+            <input type="number" id="daysPerTreatment" min="1" value="10">
+        </div>
+
+        <div class="form-group">
+            <label for="startDate">Fecha de inicio:</label>
+            <input type="text" id="startDate">
+        </div>
+
+        <button id="calculateBtn">Calcular programa</button>
+
+        <h2>Programa:</h2>
+        <p id="results"></p>
+
+        <div id="calendar"></div>
+    </div>
+    <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/es.js"></script>
+    <script>
+        // Initialize the calendar using Flatpickr
+        flatpickr("#startDate", {
+            locale: "es",
+            defaultDate: "today",
+            dateFormat: "Y-m-d"
+        });
+
+        const calculateBtn = document.getElementById("calculateBtn");
+        const results = document.getElementById("results");
+        const calendarDiv = document.getElementById("calendar");
+        const dateOptions = {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+        };
+
+        calculateBtn.addEventListener("click", () => {
+            const numTreatments = parseInt(document.getElementById("numTreatments").value, 10);
+            const daysPerTreatment = parseInt(document.getElementById("daysPerTreatment").value, 10);
+            const startDate = document.getElementById("startDate").value;
+
+            if (!numTreatments || !daysPerTreatment || !startDate) {
+                results.textContent = "Please fill out all fields correctly.";
+                return;
+            }
+
+            const start = new Date(startDate);
+            const totalDays = numTreatments * daysPerTreatment;
+            const endDate = new Date(start);
+            endDate.setDate(start.getDate() + totalDays - 1);
+
+            results.innerHTML = `Duración total: <strong>${totalDays} días</strong>`;
+
+            const treatmentDays = [];
+            for (let i = 0; i < numTreatments; i++) {
+                const treatmentStart = new Date(start.getTime());
+                treatmentStart.setDate(start.getDate() + i * daysPerTreatment);
+                treatmentDays.push(new Date(treatmentStart));
+            }
+
+            results.innerHTML += "<br><br>Cambios de aparato:";
+            treatmentDays.forEach((date, index) => {
+                results.innerHTML += `<br>Cambio ${index + 1}: <strong>${date.toLocaleDateString('es-ES', dateOptions)}</strong>`;
+            });
+
+            results.innerHTML += `<br><br>Próxima cita a partir del <strong>${endDate.toLocaleDateString('es-ES', dateOptions)}</strong>`;
+
+            const highlightedDays = [];
+            const rangeDays = [];
+            treatmentDays.forEach((date) => {
+                const startDayISO = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()-1)).toISOString().split("T")[0];
+                highlightedDays.push(startDayISO);
+
+                for (let i = 0; i < daysPerTreatment; i++) {
+                    const dayInRange = new Date(date.getTime());
+                    dayInRange.setDate(date.getDate() -1 + i);
+                    const dayInRangeISO = new Date(Date.UTC(dayInRange.getFullYear(), dayInRange.getMonth(), dayInRange.getDate())).toISOString().split("T")[0];
+                    rangeDays.push(dayInRangeISO);
+                }
+            });
+
+            const programCalendar = flatpickr(calendarDiv, {
+                locale: "es",
+                inline: true,
+                defaultDate: start,
+                enable: [...new Set([...highlightedDays, ...rangeDays])],
+                onDayCreate: (dObj, dStr, fp, dayElem) => {
+                    const dateStr = dayElem.dateObj.toISOString().split("T")[0];
+                    if (highlightedDays.includes(dateStr)) {
+                        dayElem.classList.add("highlight-start");
+                    } else if (rangeDays.includes(dateStr)) {
+                        dayElem.classList.add("highlight-range");
+                    }
+                }
+            });
+
+            programCalendar.jumpToDate(start);
+        });
+    </script>
+</body>
+</html>
