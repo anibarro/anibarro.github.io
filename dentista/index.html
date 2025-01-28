@@ -128,7 +128,7 @@
         flatpickr("#startDate", {
             locale: "es",
             defaultDate: "today",
-            dateFormat: "d-m-Y"
+            dateFormat: "Y-m-d"
         });
 
         const calculateBtn = document.getElementById("calculateBtn");
@@ -146,12 +146,11 @@
             const daysPerTreatment = parseInt(document.getElementById("daysPerTreatment").value, 10);
             const startDate = document.getElementById("startDate").value;
             const start = new Date(startDate);
-            
-            if (!numTreatments || !daysPerTreatment || !startDate || !(endDate instanceof Date && !isNaN(endDate))) {
+
+            if (!numTreatments || !daysPerTreatment || !startDate || !(start instanceof Date)) {
                 results.textContent = "Por favor, rellena correctamente los campos";
                 return;
             }
-
             
             const totalDays = numTreatments * daysPerTreatment;
             const endDate = new Date(start);
