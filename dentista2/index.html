@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Tratamientos</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Programador citas dentista</h1>
+        <form id="treatmentForm">
+            <label for="numTreatments">Número de correctores:</label>
+            <input type="number" id="numTreatments" min="1" required value="5">
+
+            <label for="daysPerTreatment">Días por corrector:</label>
+            <input type="number" id="daysPerTreatment" min="1" required value="10">
+
+            <label for="startDate">Fecha de Inicio:</label>
+            <input type="date" id="startDate" required>
+
+            <button type="submit">Calcular</button>
+        </form>
+
+        <div id="results" class="results hidden">
+            <h2>Resumen del programa</h2>
+            <p><strong>Duración Total:</strong> <span id="totalDuration"></span></p>
+            <p><strong>Próxima cita a partir del </strong> <span id="endDate"></span></p>
+            <h3>Fechas de cambio de corrector:</h3>
+            <ul id="treatmentDates"></ul>
+            <button id="printButton">Imprimir programa</button>
+        </div>
+
+        <div id="calendar"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
