@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="99.52137"
+   height="61.523502"
+   version="1.1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <defs
+     id="defs4">
+    <filter
+       id="filter4255"
+       x="-0.09239032"
+       width="1.1847806"
+       y="-0.16870523"
+       height="1.3374106">
+      <feGaussianBlur
+         stdDeviation="0.65216489"
+         id="feGaussianBlur4257" />
+    </filter>
+  </defs>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="layer2"
+     transform="translate(-352.23849,71.239127)" />
+  <g
+     id="layer3"
+     style="display:inline"
+     transform="translate(-352.23849,71.239127)" />
+  <g
+     id="layer4"
+     style="display:inline"
+     transform="translate(-352.23849,71.239127)" />
+  <g
+     style="display:inline"
+     id="g3891"
+     transform="translate(-352.23849,71.239127)">
+    <path
+       style="display:inline;opacity:1;fill:none;stroke:#00ffe0;stroke-width:0.750002;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter4255)"
+       d="m 90,38 c 0,0 0,-2 1,-5 2.147709,-7.269464 7.185804,-7.302118 10,0 2.74979,7.999142 5.77429,8.097143 9,0 1,-3 1,-5 1,-5"
+       id="path3893"
+       transform="matrix(3.9999918,0,0,3.9999918,0,-173.62073)" />
+  </g>
+  <g
+     id="layer5"
+     style="display:inline"
+     transform="translate(-352.23849,71.239127)">
+    <path
+       id="path3855"
+       d="m 359.99926,-21.621039 c 0,0 0,-7.999984 3.99999,-19.999959 8.59082,-29.077796 28.74316,-29.208412 39.99992,0 10.99914,31.9965022 23.09711,32.3885054 35.99993,0 3.99999,-11.999975 3.99999,-19.999959 3.99999,-19.999959"
+       style="display:inline;fill:none;stroke:#00ffe0;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+  </g>
+</svg>
