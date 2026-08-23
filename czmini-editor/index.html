@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CZ-mini editor v0.1</title>
+  <script>
+    window.WebAudioControlsOptions = {
+      useMidi: 1,
+      knobSrc: './knobs/plastic_knob.png',
+    };
+  </script>
+  <script src="./vendor/webaudio-controls.js"></script>
+  <script type="module" crossorigin src="/assets/index-Sgm2dr6g.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-3qYWRmPr.css">
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <h1>CZ-mini editor <span>v0.1</span></h1>
+    </header>
+    <div class="grid">
+      <!-- Row 1 -->
+      <section class="box midi-device-box" id="midi-device-box">
+        <h2>MIDI Device</h2>
+        <select id="midi-device-select">
+          <option value="" disabled selected>No MIDI device</option>
+        </select>
+      </section>
+
+      <section id="patch-loader-host" class="patch-loader-host"></section>
+
+      <!-- Row 2 -->
+      <section class="box waveform-box" id="waveform-box">
+        <div class="dco-waveform-group control-group-visual">
+          <h2>DCO 1 Waveforms</h2>
+          <div class="dco-waveform-body">
+            <div class="waveform-col">
+              <div class="waveform-row control-group-visual" data-dco="1" data-wave-index="0">
+                <button class="wave-prev">&lt;</button>
+                <span class="wave-display" id="wave-1-0"></span>
+                <button class="wave-next">&gt;</button>
+              </div>
+              <div class="waveform-row control-group-visual" data-dco="1" data-wave-index="1">
+                <button class="wave-prev">&lt;</button>
+                <span class="wave-display" id="wave-1-1"></span>
+                <button class="wave-next">&gt;</button>
+              </div>
+            </div>
+            <div class="dcw-col">
+              <span class="param-label">DCW</span>
+              <webaudio-slider id="dcw-level-1" direction="vert" src="./knobs/vsliderbody2.png" knobsrc="./knobs/vsliderknob2.png" width="32" height="164" value="0" min="0" max="99" step="1" class="dcw-level-slider"></webaudio-slider>
+              <input id="dcw-value-1" class="value-input" type="number" min="0" max="99" step="1" value="0" aria-label="DCO 1 DCW value">
+            </div>
+          </div>
+        </div>
+        <div class="dco-waveform-group control-group-visual">
+          <h2>DCO 2 Waveforms</h2>
+          <div class="dco-waveform-body">
+            <div class="waveform-col">
+              <div class="waveform-row control-group-visual" data-dco="2" data-wave-index="0">
+                <button class="wave-prev">&lt;</button>
+                <span class="wave-display" id="wave-2-0"></span>
+                <button class="wave-next">&gt;</button>
+              </div>
+              <div class="waveform-row control-group-visual" data-dco="2" data-wave-index="1">
+                <button class="wave-prev">&lt;</button>
+                <span class="wave-display" id="wave-2-1"></span>
+                <button class="wave-next">&gt;</button>
+              </div>
+            </div>
+            <div class="dcw-col">
+              <span class="param-label">DCW</span>
+              <webaudio-slider id="dcw-level-2" direction="vert" src="./knobs/vsliderbody2.png" knobsrc="./knobs/vsliderknob2.png" width="32" height="164" value="0" min="0" max="99" step="1" class="dcw-level-slider"></webaudio-slider>
+              <input id="dcw-value-2" class="value-input" type="number" min="0" max="99" step="1" value="0" aria-label="DCO 2 DCW value">
+            </div>
+          </div>
+        </div>
+        <div class="line-mod-column">
+          <section class="control-group-visual" id="line-select-box">
+            <h2>Line Select</h2>
+            <div class="radio-group">
+              <label><input type="radio" name="line-select" value="1" checked> 1</label>
+              <label><input type="radio" name="line-select" value="2"> 2</label>
+              <label><input type="radio" name="line-select" value="1+2"> 1+2</label>
+              <label><input type="radio" name="line-select" value="1+1"> 1+1</label>
+            </div>
+          </section>
+
+          <section class="control-group-visual" id="modulation-box">
+            <h2>Modulation</h2>
+            <select id="modulation-select">
+              <option value="Off" selected>Off</option>
+              <option value="Ring">Ring</option>
+              <option value="Noise">Noise</option>
+            </select>
+          </section>
+        </div>
+      </section>
+
+      <!-- Row 3 -->
+      <section class="box modulation-row" id="modulation-row">
+        <div class="control-group-layout vibrato-group control-group-visual">
+          <h2>Vibrato</h2>
+          <div class="vibrato-row">
+            <div class="vibrato-wave-col">
+              <span class="param-label">Wave</span>
+              <div class="waveform-row control-group-visual" data-param="vibrato-wave">
+                <button class="wave-prev" data-direction="-1">&lt;</button>
+                <span class="wave-display" id="vibrato-wave-display"></span>
+                <button class="wave-next" data-direction="1">&gt;</button>
+              </div>
+            </div>
+            <div class="knob-col">
+              <span class="param-label">Rate</span>
+              <webaudio-knob id="vibrato-rate" value="0" min="0" max="99" step="1" diameter="56"></webaudio-knob>
+              <input id="vibrato-rate-value" class="value-input" type="number" min="0" max="99" step="1" value="0" aria-label="Vibrato rate value">
+            </div>
+            <div class="knob-col">
+              <span class="param-label">Depth</span>
+              <webaudio-knob id="vibrato-depth" value="0" min="0" max="99" step="1" diameter="56"></webaudio-knob>
+              <input id="vibrato-depth-value" class="value-input" type="number" min="0" max="99" step="1" value="0" aria-label="Vibrato depth value">
+            </div>
+            <div class="knob-col">
+              <span class="param-label">Delay</span>
+              <webaudio-knob id="vibrato-delay" value="0" min="0" max="99" step="1" diameter="56"></webaudio-knob>
+              <input id="vibrato-delay-value" class="value-input" type="number" min="0" max="99" step="1" value="0" aria-label="Vibrato delay value">
+            </div>
+          </div>
+        </div>
+        <div class="control-group-layout detune-group control-group-visual">
+          <h2>Detune</h2>
+          <div class="detune-row">
+            <div class="switch-col">
+              <span class="param-label">Direction</span>
+              <webaudio-switch id="detune-polarity" type="toggle" src="./knobs/redbutton128.png" width="60" height="60" value="1"></webaudio-switch>
+              <span id="detune-polarity-label" class="switch-label">Up</span>
+            </div>
+            <div class="knob-col">
+              <span class="param-label">Octave</span>
+              <webaudio-knob id="detune-octave" value="0" min="0" max="3" step="1" diameter="56"></webaudio-knob>
+              <input id="detune-octave-value" class="value-input" type="number" min="0" max="3" step="1" value="0" aria-label="Detune octave value">
+            </div>
+            <div class="knob-col">
+              <span class="param-label">Note</span>
+              <webaudio-knob id="detune-note" value="0" min="0" max="11" step="1" diameter="56"></webaudio-knob>
+              <input id="detune-note-value" class="value-input" type="number" min="0" max="11" step="1" value="0" aria-label="Detune note value">
+            </div>
+            <div class="knob-col">
+              <span class="param-label">Fine</span>
+              <webaudio-knob id="detune-fine" value="0" min="0" max="60" step="1" diameter="56"></webaudio-knob>
+              <input id="detune-fine-value" class="value-input" type="number" min="0" max="60" step="1" value="0" aria-label="Detune fine value">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Row 4 -->
+      <section class="box envelope-selector-box" id="envelope-selector-box">
+        <div class="box dco-select-column control-group-visual" id="dco-select-box">
+          <h2>Select DCO</h2>
+          <div class="button-group">
+            <button class="dco-btn active" data-dco="1">1</button>
+            <button class="dco-btn" data-dco="2">2</button>
+          </div>
+        </div>
+
+        <div class="envelope-select-control control-group-visual">
+          <h2>Envelope Select</h2>
+          <div class="button-group">
+            <button class="env-btn active" data-env="pitch">Pitch</button>
+            <button class="env-btn" data-env="dcw">DCW</button>
+            <button class="env-btn" data-env="dca">DCA</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Row 4 -->
+      <section class="box envelope-box" id="envelope-box">
+        <div class="envelope-title-row">
+          <span id="envelope-type-label" class="envelope-type-label">Pitch Envelope</span>
+        </div>
+        <div class="envelope-top-row">
+          <div id="lcd">
+            <canvas id="lcd-canvas"></canvas>
+          </div>
+          <div class="keyfollow-panel control-group-visual" id="keyfollow-panel">
+            <h2>Key Follow</h2>
+            <div class="keyfollow-controls">
+              <div class="switch-col">
+                <span class="param-label">Direction</span>
+                <webaudio-switch id="keyfollow-switch" type="toggle" src="./knobs/redbutton128.png" width="60" height="60" value="0"></webaudio-switch>
+                <span id="keyfollow-label" class="switch-label">Off</span>
+              </div>
+              <div class="knob-col">
+                <span class="param-label">Range</span>
+                <webaudio-knob id="keyfollow-range" value="0" min="0" max="99" step="1" diameter="56"></webaudio-knob>
+                <input id="keyfollow-range-value" class="value-input" type="number" min="0" max="99" step="1" value="0" aria-label="Key follow range value">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="toolbar">
+          <div class="step-selector control-group-visual" data-param="sustain">
+            <span class="param-label">Sustain</span>
+            <div class="step-row">
+              <button class="step-prev">&lt;</button>
+              <span class="step-display" id="sustain-display">3</span>
+              <button class="step-next">&gt;</button>
+            </div>
+          </div>
+          <div class="step-selector control-group-visual" data-param="end">
+            <span class="param-label">End</span>
+            <div class="step-row">
+              <button class="step-prev">&lt;</button>
+              <span class="step-display" id="end-display">5</span>
+              <button class="step-next">&gt;</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="controls">
+          <div class="column" data-step="1">
+            <span class="badge">S</span>
+            <webaudio-slider id="sli-1" direction="vert" src="./knobs/vsliderbody2.png" knobsrc="./knobs/vsliderknob2.png" width="24" height="164" value="0" min="0" max="99" step="1"></webaudio-slider>
+            <input id="sli-val-1" class="value-input env-value" type="number" min="0" max="99" step="1" value="0" aria-label="Envelope level 1 value">
+            <webaudio-knob id="knb-1" value="20" min="0" max="99" step="1" diameter="56"></webaudio-knob>
+            <input id="knb-val-1" class="value-input env-value" type="number" min="0" max="99" step="1" value="20" aria-label="Envelope rate 1 value">
+          </div>
+          <div class="column" data-step="2">
+            <span class="badge"></span>
+            <webaudio-slider id="sli-2" direction="vert" src="./knobs/vsliderbody2.png" knobsrc="./knobs/vsliderknob2.png" width="24" height="164" value="80" min="0" max="99" step="1"></webaudio-slider>
+            <input id="sli-val-2" class="value-input env-value" type="number" min="0" max="99" step="1" value="80" aria-label="Envelope level 2 value">
+            <webaudio-knob id="knb-2" value="30" min="0" max="99" step="1" diameter="56"></webaudio-knob>
+            <input id="knb-val-2" class="value-input env-value" type="number" min="0" max="99" step="1" value="30" aria-label="Envelope rate 2 value">
+          </div>
+          <div class="column" data-step="3">
+            <span class="badge"></span>
+            <webaudio-slider id="sli-3" direction="vert" src="./knobs/vsliderbody2.png" knobsrc="./knobs/vsliderknob2.png" width="24" height="164" value="60" min="0" max="99" step="1"></webaudio-slider>
+            <input id="sli-val-3" class="value-input env-value" type="number" min="0" max="99" step="1" value="60" aria-label="Envelope level 3 value">
+            <webaudio-knob id="knb-3" value="25" min="0" max="99" step="1" diameter="56"></webaudio-knob>
+            <input id="knb-val-3" class="value-input env-value" type="number" min="0" max="99" step="1" value="25" aria-label="Envelope rate 3 value">
+          </div>
+          <div class="column" data-step="4">
+            <span class="badge">E</span>
+            <webaudio-slider id="sli-4" direction="vert" src="./knobs/vsliderbody2.png" knobsrc="./knobs/vsliderknob2.png" width="24" height="164" value="0" min="0" max="99" step="1"></webaudio-slider>
+            <input id="sli-val-4" class="value-input env-value" type="number" min="0" max="99" step="1" value="0" aria-label="Envelope level 4 value">
+            <webaudio-knob id="knb-4" value="35" min="0" max="99" step="1" diameter="56"></webaudio-knob>
+            <input id="knb-val-4" class="value-input env-value" type="number" min="0" max="99" step="1" value="35" aria-label="Envelope rate 4 value">
+          </div>
+          <div class="column" data-step="5">
+            <span class="badge"></span>
+            <webaudio-slider id="sli-5" direction="vert" src="./knobs/vsliderbody2.png" knobsrc="./knobs/vsliderknob2.png" width="24" height="164" value="55" min="0" max="99" step="1"></webaudio-slider>
+            <input id="sli-val-5" class="value-input env-value" type="number" min="0" max="99" step="1" value="55" aria-label="Envelope level 5 value">
+            <webaudio-knob id="knb-5" value="20" min="0" max="99" step="1" diameter="56"></webaudio-knob>
+            <input id="knb-val-5" class="value-input env-value" type="number" min="0" max="99" step="1" value="20" aria-label="Envelope rate 5 value">
+          </div>
+          <div class="column" data-step="6">
+            <span class="badge"></span>
+            <webaudio-slider id="sli-6" direction="vert" src="./knobs/vsliderbody2.png" knobsrc="./knobs/vsliderknob2.png" width="24" height="164" value="30" min="0" max="99" step="1"></webaudio-slider>
+            <input id="sli-val-6" class="value-input env-value" type="number" min="0" max="99" step="1" value="30" aria-label="Envelope level 6 value">
+            <webaudio-knob id="knb-6" value="25" min="0" max="99" step="1" diameter="56"></webaudio-knob>
+            <input id="knb-val-6" class="value-input env-value" type="number" min="0" max="99" step="1" value="25" aria-label="Envelope rate 6 value">
+          </div>
+          <div class="column" data-step="7">
+            <span class="badge"></span>
+            <webaudio-slider id="sli-7" direction="vert" src="./knobs/vsliderbody2.png" knobsrc="./knobs/vsliderknob2.png" width="24" height="164" value="20" min="0" max="99" step="1"></webaudio-slider>
+            <input id="sli-val-7" class="value-input env-value" type="number" min="0" max="99" step="1" value="20" aria-label="Envelope level 7 value">
+            <webaudio-knob id="knb-7" value="30" min="0" max="99" step="1" diameter="56"></webaudio-knob>
+            <input id="knb-val-7" class="value-input env-value" type="number" min="0" max="99" step="1" value="30" aria-label="Envelope rate 7 value">
+          </div>
+          <div class="column" data-step="8">
+            <span class="badge"></span>
+            <webaudio-slider id="sli-8" direction="vert" src="./knobs/vsliderbody2.png" knobsrc="./knobs/vsliderknob2.png" width="24" height="164" value="10" min="0" max="99" step="1"></webaudio-slider>
+            <input id="sli-val-8" class="value-input env-value" type="number" min="0" max="99" step="1" value="10" aria-label="Envelope level 8 value">
+            <webaudio-knob id="knb-8" value="20" min="0" max="99" step="1" diameter="56"></webaudio-knob>
+            <input id="knb-val-8" class="value-input env-value" type="number" min="0" max="99" step="1" value="20" aria-label="Envelope rate 8 value">
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+</body>
+</html>
