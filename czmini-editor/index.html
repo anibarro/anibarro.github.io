@@ -11,13 +11,16 @@
     };
   </script>
   <script src="./vendor/webaudio-controls.js"></script>
-  <script type="module" crossorigin src="./assets/main-CsEmgL27.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-3qYWRmPr.css">
+  <script type="module" crossorigin src="./assets/main-CaOIiQx0.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-DyE-ZZaY.css">
 </head>
 <body>
   <div id="app">
     <header class="app-header">
       <h1>CZ-mini editor <span>v0.1</span></h1>
+      <button id="global-rand-btn" class="rand-btn page-rand-btn" type="button" aria-label="Randomize all randomizable controls">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABTElEQVR4AezWUU4DMQwEUOBkcDLgZHAz8KvUDzay192kVKpaZdrZZDKeJv7Yl6cbfx4BHieQncB79OZX4GcheIbd35EF+AjZZ+B5Ed7C5zUwjCwA4bevReB1cYBzbRtdB+Dn+eyXhhbwTHear07gJIgvd8cI8JgqBw0t4KW4E6A0mF3sBNCM7hDwvZo0tICX+k4ARroY8NIwFmloAY+pfHQC5LsXrMwE0GQ6HfBDcWYC6HCFAf/3AIcKbjfNnIAO12SAb71bzzMBFNbpgLcKbkUzAbZeh547ATSZTgd8rxANLeClvhNAhzMCvDSMRRpawGMqH50A+e4FK50AOlyTAb5XloYW8FLfCcBIpwNeGsYiDS3gMZWPLICN7jDfedlK6lUF0MWrXko1o/fMIXYWwN2teiHl4zp4tgMMwmtNZCdwrXqD7/0HGP7yZuIXAAD//4gU13AAAAAGSURBVAMASEtXQWAswwgAAAAASUVORK5CYII=" alt="Randomize all controls" />
+      </button>
     </header>
     <div class="grid">
       <!-- Row 1 -->
@@ -32,8 +35,13 @@
 
       <!-- Row 2 -->
       <section class="box waveform-box" id="waveform-box">
-        <div class="dco-waveform-group control-group-visual">
-          <h2>DCO 1 Waveforms</h2>
+        <div class="dco-waveform-group control-group-visual" data-randomize-group="dco-waveforms" data-dco="1">
+          <div class="group-header-row">
+            <h2>DCO 1 Waveforms</h2>
+            <button class="rand-btn group-rand-btn" type="button" aria-label="Randomize DCO 1 waveforms">
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABTElEQVR4AezWUU4DMQwEUOBkcDLgZHAz8KvUDzay192kVKpaZdrZZDKeJv7Yl6cbfx4BHieQncB79OZX4GcheIbd35EF+AjZZ+B5Ed7C5zUwjCwA4bevReB1cYBzbRtdB+Dn+eyXhhbwTHear07gJIgvd8cI8JgqBw0t4KW4E6A0mF3sBNCM7hDwvZo0tICX+k4ARroY8NIwFmloAY+pfHQC5LsXrMwE0GQ6HfBDcWYC6HCFAf/3AIcKbjfNnIAO12SAb71bzzMBFNbpgLcKbkUzAbZeh547ATSZTgd8rxANLeClvhNAhzMCvDSMRRpawGMqH50A+e4FK50AOlyTAb5XloYW8FLfCcBIpwNeGsYiDS3gMZWPLICN7jDfedlK6lUF0MWrXko1o/fMIXYWwN2teiHl4zp4tgMMwmtNZCdwrXqD7/0HGP7yZuIXAAD//4gU13AAAAAGSURBVAMASEtXQWAswwgAAAAASUVORK5CYII=" alt="Randomize DCO 1 waveforms" />
+            </button>
+          </div>
           <div class="dco-waveform-body">
             <div class="waveform-col">
               <div class="waveform-row control-group-visual" data-dco="1" data-wave-index="0">
@@ -54,8 +62,13 @@
             </div>
           </div>
         </div>
-        <div class="dco-waveform-group control-group-visual">
-          <h2>DCO 2 Waveforms</h2>
+        <div class="dco-waveform-group control-group-visual" data-randomize-group="dco-waveforms" data-dco="2">
+          <div class="group-header-row">
+            <h2>DCO 2 Waveforms</h2>
+            <button class="rand-btn group-rand-btn" type="button" aria-label="Randomize DCO 2 waveforms">
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABTElEQVR4AezWUU4DMQwEUOBkcDLgZHAz8KvUDzay192kVKpaZdrZZDKeJv7Yl6cbfx4BHieQncB79OZX4GcheIbd35EF+AjZZ+B5Ed7C5zUwjCwA4bevReB1cYBzbRtdB+Dn+eyXhhbwTHear07gJIgvd8cI8JgqBw0t4KW4E6A0mF3sBNCM7hDwvZo0tICX+k4ARroY8NIwFmloAY+pfHQC5LsXrMwE0GQ6HfBDcWYC6HCFAf/3AIcKbjfNnIAO12SAb71bzzMBFNbpgLcKbkUzAbZeh547ATSZTgd8rxANLeClvhNAhzMCvDSMRRpawGMqH50A+e4FK50AOlyTAb5XloYW8FLfCcBIpwNeGsYiDS3gMZWPLICN7jDfedlK6lUF0MWrXko1o/fMIXYWwN2teiHl4zp4tgMMwmtNZCdwrXqD7/0HGP7yZuIXAAD//4gU13AAAAAGSURBVAMASEtXQWAswwgAAAAASUVORK5CYII=" alt="Randomize DCO 2 waveforms" />
+            </button>
+          </div>
           <div class="dco-waveform-body">
             <div class="waveform-col">
               <div class="waveform-row control-group-visual" data-dco="2" data-wave-index="0">
@@ -100,8 +113,13 @@
 
       <!-- Row 3 -->
       <section class="box modulation-row" id="modulation-row">
-        <div class="control-group-layout vibrato-group control-group-visual">
-          <h2>Vibrato</h2>
+        <div class="control-group-layout vibrato-group control-group-visual" data-randomize-group="vibrato">
+          <div class="group-header-row">
+            <h2>Vibrato</h2>
+            <button class="rand-btn group-rand-btn" type="button" aria-label="Randomize vibrato">
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABTElEQVR4AezWUU4DMQwEUOBkcDLgZHAz8KvUDzay192kVKpaZdrZZDKeJv7Yl6cbfx4BHieQncB79OZX4GcheIbd35EF+AjZZ+B5Ed7C5zUwjCwA4bevReB1cYBzbRtdB+Dn+eyXhhbwTHear07gJIgvd8cI8JgqBw0t4KW4E6A0mF3sBNCM7hDwvZo0tICX+k4ARroY8NIwFmloAY+pfHQC5LsXrMwE0GQ6HfBDcWYC6HCFAf/3AIcKbjfNnIAO12SAb71bzzMBFNbpgLcKbkUzAbZeh547ATSZTgd8rxANLeClvhNAhzMCvDSMRRpawGMqH50A+e4FK50AOlyTAb5XloYW8FLfCcBIpwNeGsYiDS3gMZWPLICN7jDfedlK6lUF0MWrXko1o/fMIXYWwN2teiHl4zp4tgMMwmtNZCdwrXqD7/0HGP7yZuIXAAD//4gU13AAAAAGSURBVAMASEtXQWAswwgAAAAASUVORK5CYII=" alt="Randomize vibrato" />
+            </button>
+          </div>
           <div class="vibrato-row">
             <div class="vibrato-wave-col">
               <span class="param-label">Wave</span>
@@ -128,8 +146,13 @@
             </div>
           </div>
         </div>
-        <div class="control-group-layout detune-group control-group-visual">
-          <h2>Detune</h2>
+        <div class="control-group-layout detune-group control-group-visual" data-randomize-group="detune">
+          <div class="group-header-row">
+            <h2>Detune</h2>
+            <button class="rand-btn group-rand-btn" type="button" aria-label="Randomize detune">
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABTElEQVR4AezWUU4DMQwEUOBkcDLgZHAz8KvUDzay192kVKpaZdrZZDKeJv7Yl6cbfx4BHieQncB79OZX4GcheIbd35EF+AjZZ+B5Ed7C5zUwjCwA4bevReB1cYBzbRtdB+Dn+eyXhhbwTHear07gJIgvd8cI8JgqBw0t4KW4E6A0mF3sBNCM7hDwvZo0tICX+k4ARroY8NIwFmloAY+pfHQC5LsXrMwE0GQ6HfBDcWYC6HCFAf/3AIcKbjfNnIAO12SAb71bzzMBFNbpgLcKbkUzAbZeh547ATSZTgd8rxANLeClvhNAhzMCvDSMRRpawGMqH50A+e4FK50AOlyTAb5XloYW8FLfCcBIpwNeGsYiDS3gMZWPLICN7jDfedlK6lUF0MWrXko1o/fMIXYWwN2teiHl4zp4tgMMwmtNZCdwrXqD7/0HGP7yZuIXAAD//4gU13AAAAAGSURBVAMASEtXQWAswwgAAAAASUVORK5CYII=" alt="Randomize detune" />
+            </button>
+          </div>
           <div class="detune-row">
             <div class="switch-col">
               <span class="param-label">Direction</span>
@@ -179,6 +202,9 @@
       <section class="box envelope-box" id="envelope-box">
         <div class="envelope-title-row">
           <span id="envelope-type-label" class="envelope-type-label">Pitch Envelope</span>
+          <button id="rand-envelope-btn" class="rand-btn" type="button" aria-label="Randomize current envelope">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABTElEQVR4AezWUU4DMQwEUOBkcDLgZHAz8KvUDzay192kVKpaZdrZZDKeJv7Yl6cbfx4BHieQncB79OZX4GcheIbd35EF+AjZZ+B5Ed7C5zUwjCwA4bevReB1cYBzbRtdB+Dn+eyXhhbwTHear07gJIgvd8cI8JgqBw0t4KW4E6A0mF3sBNCM7hDwvZo0tICX+k4ARroY8NIwFmloAY+pfHQC5LsXrMwE0GQ6HfBDcWYC6HCFAf/3AIcKbjfNnIAO12SAb71bzzMBFNbpgLcKbkUzAbZeh547ATSZTgd8rxANLeClvhNAhzMCvDSMRRpawGMqH50A+e4FK50AOlyTAb5XloYW8FLfCcBIpwNeGsYiDS3gMZWPLICN7jDfedlK6lUF0MWrXko1o/fMIXYWwN2teiHl4zp4tgMMwmtNZCdwrXqD7/0HGP7yZuIXAAD//4gU13AAAAAGSURBVAMASEtXQWAswwgAAAAASUVORK5CYII=" alt="Randomize" />
+          </button>
         </div>
         <div class="envelope-top-row">
           <div id="lcd">
