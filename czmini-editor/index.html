@@ -11,8 +11,8 @@
     };
   </script>
   <script src="./vendor/webaudio-controls.js"></script>
-  <script type="module" crossorigin src="./assets/main-CaOIiQx0.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-DyE-ZZaY.css">
+  <script type="module" crossorigin src="./assets/main-DA4CaQAG.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-CJoLzEt_.css">
 </head>
 <body>
   <div id="app">
@@ -31,7 +31,20 @@
         </select>
       </section>
 
-      <section id="patch-loader-host" class="patch-loader-host"></section>
+      <section id="patch-loader-host" class="patch-loader-host">
+        <section class="box patch-loader-box" id="patch-loader-box">
+          <h2>CZ-1 SysEx Patch Loader</h2>
+          <div class="demo-bank-row" aria-label="Demo bank shortcuts">
+            <span class="demo-bank-label">DEMO BANKS</span>
+            <button type="button" class="demo-bank-btn" data-demo-bank="RC10">RC10</button>
+            <button type="button" class="demo-bank-btn" data-demo-bank="RC20">RC20</button>
+            <button type="button" class="demo-bank-btn" data-demo-bank="RC30">RC30</button>
+          </div>
+          <input type="file" id="cz-patch-file" accept=".syx,.bin,.midi,.mid" />
+          <ul id="cz-patch-list" class="patch-list hidden"></ul>
+          <div id="cz-patch-status" class="patch-status"></div>
+        </section>
+      </section>
 
       <!-- Row 2 -->
       <section class="box waveform-box" id="waveform-box">
