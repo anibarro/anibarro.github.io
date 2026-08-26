@@ -11,8 +11,8 @@
     };
   </script>
   <script src="./vendor/webaudio-controls.js"></script>
-  <script type="module" crossorigin src="./assets/main-DtagJw3F.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-BcAQXTya.css">
+  <script type="module" crossorigin src="./assets/main-wmI-qfXD.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-BMGFy7xU.css">
 </head>
 <body>
   <div id="app">
@@ -29,7 +29,11 @@
         <select id="midi-device-select">
           <option value="" disabled selected>No MIDI device</option>
         </select>
-        <div class="midi-actions-row">
+        <div class="midi-actions-row top-row">
+          <button id="sync-syx-btn" class="sync-syx-btn" type="button">Sync</button>
+          <span><small>(Send current patch to CZ-1 Mini)</small></span>
+        </div>
+        <div class="midi-actions-row bottom-row">
           <button id="save-syx-btn" class="save-syx-btn" type="button">Export .syx</button>
           <span><small>(Experimental, Casio CZ-1 format)</small></span>
           <!-- <button id="listen-syx-btn" class="listen-syx-btn" type="button">Listen for syx</button> -->
