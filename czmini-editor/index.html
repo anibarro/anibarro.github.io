@@ -11,8 +11,8 @@
     };
   </script>
   <script src="./vendor/webaudio-controls.js"></script>
-  <script type="module" crossorigin src="./assets/main-BIFnwMlI.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-CJoLzEt_.css">
+  <script type="module" crossorigin src="./assets/main-DtagJw3F.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-BcAQXTya.css">
 </head>
 <body>
   <div id="app">
@@ -29,7 +29,20 @@
         <select id="midi-device-select">
           <option value="" disabled selected>No MIDI device</option>
         </select>
+        <div class="midi-actions-row">
+          <button id="save-syx-btn" class="save-syx-btn" type="button">Export .syx</button>
+          <span><small>(Experimental, Casio CZ-1 format)</small></span>
+          <!-- <button id="listen-syx-btn" class="listen-syx-btn" type="button">Listen for syx</button> -->
+        </div>
       </section>
+
+      <div id="syx-listen-modal" class="syx-modal hidden" role="dialog" aria-modal="true" aria-labelledby="syx-listen-title">
+        <div class="syx-modal-content">
+          <h3 id="syx-listen-title">Waiting for SysEx dump</h3>
+          <p>Send a patch dump from the synth. The browser will save the received .syx file automatically.</p>
+          <button id="syx-listen-cancel" type="button">Cancel</button>
+        </div>
+      </div>
 
       <section id="patch-loader-host" class="patch-loader-host">
         <section class="box patch-loader-box" id="patch-loader-box">
