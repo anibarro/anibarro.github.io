@@ -11,14 +11,17 @@
     };
   </script>
   <script src="./vendor/webaudio-controls.js"></script>
-  <script type="module" crossorigin src="./assets/main-TqZhCVYr.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-BMGFy7xU.css">
+  <script type="module" crossorigin src="./assets/main-DLod0w7o.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-BrKOmpyZ.css">
 </head>
 <body>
   <div id="app">
     <header class="app-header">
-      <h1>CZ-mini editor <span>v0.1</span></h1>
-      <button id="global-rand-btn" class="rand-btn page-rand-btn" type="button" aria-label="Randomize all randomizable controls">
+      <div class="app-title-wrap">
+        <h1>CZ-mini editor <span>v0.1</span></h1>
+        <button id="info-mode-btn" class="info-mode-btn" type="button" aria-label="Show help">?</button>
+      </div>
+      <button id="global-rand-btn" class="rand-btn page-rand-btn" type="button" aria-label="Randomize all randomizable controls" data-info="Global randomizer">
         <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABTElEQVR4AezWUU4DMQwEUOBkcDLgZHAz8KvUDzay192kVKpaZdrZZDKeJv7Yl6cbfx4BHieQncB79OZX4GcheIbd35EF+AjZZ+B5Ed7C5zUwjCwA4bevReB1cYBzbRtdB+Dn+eyXhhbwTHear07gJIgvd8cI8JgqBw0t4KW4E6A0mF3sBNCM7hDwvZo0tICX+k4ARroY8NIwFmloAY+pfHQC5LsXrMwE0GQ6HfBDcWYC6HCFAf/3AIcKbjfNnIAO12SAb71bzzMBFNbpgLcKbkUzAbZeh547ATSZTgd8rxANLeClvhNAhzMCvDSMRRpawGMqH50A+e4FK50AOlyTAb5XloYW8FLfCcBIpwNeGsYiDS3gMZWPLICN7jDfedlK6lUF0MWrXko1o/fMIXYWwN2teiHl4zp4tgMMwmtNZCdwrXqD7/0HGP7yZuIXAAD//4gU13AAAAAGSURBVAMASEtXQWAswwgAAAAASUVORK5CYII=" alt="Randomize all controls" />
       </button>
     </header>
@@ -30,12 +33,14 @@
           <option value="" disabled selected>No MIDI device</option>
         </select>
         <div class="midi-actions-row top-row">
-          <button id="sync-syx-btn" class="sync-syx-btn" type="button">Sync</button>
-          <span><small>(Send current patch to CZ-1 Mini)</small></span>
+          <button id="sync-syx-btn" class="sync-syx-btn" type="button" data-info="Send current patch to CZ-1 Mini">Sync</button>
+          <button id="save-syx-btn" class="save-syx-btn" type="button" data-info="Export current patch as .syx file. Experimental, Casio CZ-1 format. Disabled if any envelope has sustain step greater than or equal to end step.">Export .syx</button>
+          <label class="compatibility-toggle control-group-visual" for="compatibility-mode" data-info="Uncheck to allow SUSTAIN step to be set beyond END step. This is not compatible with the original CZ-1 synth, but allows for interesting effects.">
+            <input id="compatibility-mode" type="checkbox" checked>
+            <span>Compatibility mode</span>
+          </label>
         </div>
         <div class="midi-actions-row bottom-row">
-          <button id="save-syx-btn" class="save-syx-btn" type="button">Export .syx</button>
-          <span><small>(Experimental, Casio CZ-1 format)</small></span>
           <!-- <button id="listen-syx-btn" class="listen-syx-btn" type="button">Listen for syx</button> -->
         </div>
       </section>
@@ -57,7 +62,7 @@
             <button type="button" class="demo-bank-btn" data-demo-bank="RC20">RC20</button>
             <button type="button" class="demo-bank-btn" data-demo-bank="RC30">RC30</button>
           </div>
-          <input type="file" id="cz-patch-file" accept=".syx,.bin,.midi,.mid" />
+          <input type="file" id="cz-patch-file" accept=".syx,.bin,.midi,.mid" data-info="Load original CZ-1 compatible patches" />
           <ul id="cz-patch-list" class="patch-list hidden"></ul>
           <div id="cz-patch-status" class="patch-status"></div>
         </section>
@@ -68,7 +73,7 @@
         <div class="dco-waveform-group control-group-visual" data-randomize-group="dco-waveforms" data-dco="1">
           <div class="group-header-row">
             <h2>DCO 1 Waveforms</h2>
-            <button class="rand-btn group-rand-btn" type="button" aria-label="Randomize DCO 1 waveforms">
+            <button class="rand-btn group-rand-btn" type="button" aria-label="Randomize DCO 1 waveforms" data-info="Local control randomizer">
               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABTElEQVR4AezWUU4DMQwEUOBkcDLgZHAz8KvUDzay192kVKpaZdrZZDKeJv7Yl6cbfx4BHieQncB79OZX4GcheIbd35EF+AjZZ+B5Ed7C5zUwjCwA4bevReB1cYBzbRtdB+Dn+eyXhhbwTHear07gJIgvd8cI8JgqBw0t4KW4E6A0mF3sBNCM7hDwvZo0tICX+k4ARroY8NIwFmloAY+pfHQC5LsXrMwE0GQ6HfBDcWYC6HCFAf/3AIcKbjfNnIAO12SAb71bzzMBFNbpgLcKbkUzAbZeh547ATSZTgd8rxANLeClvhNAhzMCvDSMRRpawGMqH50A+e4FK50AOlyTAb5XloYW8FLfCcBIpwNeGsYiDS3gMZWPLICN7jDfedlK6lUF0MWrXko1o/fMIXYWwN2teiHl4zp4tgMMwmtNZCdwrXqD7/0HGP7yZuIXAAD//4gU13AAAAAGSURBVAMASEtXQWAswwgAAAAASUVORK5CYII=" alt="Randomize DCO 1 waveforms" />
             </button>
           </div>
@@ -95,7 +100,7 @@
         <div class="dco-waveform-group control-group-visual" data-randomize-group="dco-waveforms" data-dco="2">
           <div class="group-header-row">
             <h2>DCO 2 Waveforms</h2>
-            <button class="rand-btn group-rand-btn" type="button" aria-label="Randomize DCO 2 waveforms">
+            <button class="rand-btn group-rand-btn" type="button" aria-label="Randomize DCO 2 waveforms" data-info="Local control randomizer">
               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABTElEQVR4AezWUU4DMQwEUOBkcDLgZHAz8KvUDzay192kVKpaZdrZZDKeJv7Yl6cbfx4BHieQncB79OZX4GcheIbd35EF+AjZZ+B5Ed7C5zUwjCwA4bevReB1cYBzbRtdB+Dn+eyXhhbwTHear07gJIgvd8cI8JgqBw0t4KW4E6A0mF3sBNCM7hDwvZo0tICX+k4ARroY8NIwFmloAY+pfHQC5LsXrMwE0GQ6HfBDcWYC6HCFAf/3AIcKbjfNnIAO12SAb71bzzMBFNbpgLcKbkUzAbZeh547ATSZTgd8rxANLeClvhNAhzMCvDSMRRpawGMqH50A+e4FK50AOlyTAb5XloYW8FLfCcBIpwNeGsYiDS3gMZWPLICN7jDfedlK6lUF0MWrXko1o/fMIXYWwN2teiHl4zp4tgMMwmtNZCdwrXqD7/0HGP7yZuIXAAD//4gU13AAAAAGSURBVAMASEtXQWAswwgAAAAASUVORK5CYII=" alt="Randomize DCO 2 waveforms" />
             </button>
           </div>
@@ -146,7 +151,7 @@
         <div class="control-group-layout vibrato-group control-group-visual" data-randomize-group="vibrato">
           <div class="group-header-row">
             <h2>Vibrato</h2>
-            <button class="rand-btn group-rand-btn" type="button" aria-label="Randomize vibrato">
+            <button class="rand-btn group-rand-btn" type="button" aria-label="Randomize vibrato" data-info="Local control randomizer">
               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABTElEQVR4AezWUU4DMQwEUOBkcDLgZHAz8KvUDzay192kVKpaZdrZZDKeJv7Yl6cbfx4BHieQncB79OZX4GcheIbd35EF+AjZZ+B5Ed7C5zUwjCwA4bevReB1cYBzbRtdB+Dn+eyXhhbwTHear07gJIgvd8cI8JgqBw0t4KW4E6A0mF3sBNCM7hDwvZo0tICX+k4ARroY8NIwFmloAY+pfHQC5LsXrMwE0GQ6HfBDcWYC6HCFAf/3AIcKbjfNnIAO12SAb71bzzMBFNbpgLcKbkUzAbZeh547ATSZTgd8rxANLeClvhNAhzMCvDSMRRpawGMqH50A+e4FK50AOlyTAb5XloYW8FLfCcBIpwNeGsYiDS3gMZWPLICN7jDfedlK6lUF0MWrXko1o/fMIXYWwN2teiHl4zp4tgMMwmtNZCdwrXqD7/0HGP7yZuIXAAD//4gU13AAAAAGSURBVAMASEtXQWAswwgAAAAASUVORK5CYII=" alt="Randomize vibrato" />
             </button>
           </div>
@@ -179,14 +184,14 @@
         <div class="control-group-layout detune-group control-group-visual" data-randomize-group="detune">
           <div class="group-header-row">
             <h2>Detune</h2>
-            <button class="rand-btn group-rand-btn" type="button" aria-label="Randomize detune">
+            <button class="rand-btn group-rand-btn" type="button" aria-label="Randomize detune" data-info="Local control randomizer">
               <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABTElEQVR4AezWUU4DMQwEUOBkcDLgZHAz8KvUDzay192kVKpaZdrZZDKeJv7Yl6cbfx4BHieQncB79OZX4GcheIbd35EF+AjZZ+B5Ed7C5zUwjCwA4bevReB1cYBzbRtdB+Dn+eyXhhbwTHear07gJIgvd8cI8JgqBw0t4KW4E6A0mF3sBNCM7hDwvZo0tICX+k4ARroY8NIwFmloAY+pfHQC5LsXrMwE0GQ6HfBDcWYC6HCFAf/3AIcKbjfNnIAO12SAb71bzzMBFNbpgLcKbkUzAbZeh547ATSZTgd8rxANLeClvhNAhzMCvDSMRRpawGMqH50A+e4FK50AOlyTAb5XloYW8FLfCcBIpwNeGsYiDS3gMZWPLICN7jDfedlK6lUF0MWrXko1o/fMIXYWwN2teiHl4zp4tgMMwmtNZCdwrXqD7/0HGP7yZuIXAAD//4gU13AAAAAGSURBVAMASEtXQWAswwgAAAAASUVORK5CYII=" alt="Randomize detune" />
             </button>
           </div>
           <div class="detune-row">
             <div class="switch-col">
               <span class="param-label">Direction</span>
-              <webaudio-switch id="detune-polarity" type="toggle" src="./knobs/redbutton128.png" width="60" height="60" value="1"></webaudio-switch>
+              <webaudio-switch id="detune-polarity" type="toggle" src="./knobs/switch_updown.png" width="60" height="60" value="1"></webaudio-switch>
               <span id="detune-polarity-label" class="switch-label">Up</span>
             </div>
             <div class="knob-col">
@@ -232,7 +237,7 @@
       <section class="box envelope-box" id="envelope-box">
         <div class="envelope-title-row">
           <span id="envelope-type-label" class="envelope-type-label">Pitch Envelope</span>
-          <button id="rand-envelope-btn" class="rand-btn" type="button" aria-label="Randomize current envelope">
+          <button id="rand-envelope-btn" class="rand-btn" type="button" aria-label="Randomize current envelope" data-info="Local control randomizer">
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABTElEQVR4AezWUU4DMQwEUOBkcDLgZHAz8KvUDzay192kVKpaZdrZZDKeJv7Yl6cbfx4BHieQncB79OZX4GcheIbd35EF+AjZZ+B5Ed7C5zUwjCwA4bevReB1cYBzbRtdB+Dn+eyXhhbwTHear07gJIgvd8cI8JgqBw0t4KW4E6A0mF3sBNCM7hDwvZo0tICX+k4ARroY8NIwFmloAY+pfHQC5LsXrMwE0GQ6HfBDcWYC6HCFAf/3AIcKbjfNnIAO12SAb71bzzMBFNbpgLcKbkUzAbZeh547ATSZTgd8rxANLeClvhNAhzMCvDSMRRpawGMqH50A+e4FK50AOlyTAb5XloYW8FLfCcBIpwNeGsYiDS3gMZWPLICN7jDfedlK6lUF0MWrXko1o/fMIXYWwN2teiHl4zp4tgMMwmtNZCdwrXqD7/0HGP7yZuIXAAD//4gU13AAAAAGSURBVAMASEtXQWAswwgAAAAASUVORK5CYII=" alt="Randomize" />
           </button>
         </div>
@@ -244,8 +249,8 @@
             <h2>Key Follow</h2>
             <div class="keyfollow-controls">
               <div class="switch-col">
-                <span class="param-label">Direction</span>
-                <webaudio-switch id="keyfollow-switch" type="toggle" src="./knobs/redbutton128.png" width="60" height="60" value="0"></webaudio-switch>
+                <span class="param-label">Polarity</span>
+                <webaudio-switch id="keyfollow-switch" type="toggle" src="./knobs/switch_onoff.png" width="60" height="60" value="0"></webaudio-switch>
                 <span id="keyfollow-label" class="switch-label">Off</span>
               </div>
               <div class="knob-col">
@@ -337,6 +342,67 @@
       </section>
     </div>
   </div>
-
+
+  <div id="info-tooltip" class="info-tooltip" aria-live="polite"></div>
+  <script>
+    const infoButton = document.getElementById('info-mode-btn');
+    const tooltip = document.getElementById('info-tooltip');
+
+    function hideTooltip() {
+      tooltip.classList.remove('visible');
+    }
+
+    function showTooltip(target, event) {
+      const text = target.dataset.info;
+      if (!text) return;
+      tooltip.textContent = text;
+      tooltip.classList.add('visible');
+      const offset = 12;
+      const x = Math.min(window.innerWidth - tooltip.offsetWidth - 8, event.clientX + offset);
+      const y = Math.min(window.innerHeight - tooltip.offsetHeight - 8, event.clientY + offset);
+      tooltip.style.left = `${Math.max(8, x)}px`;
+      tooltip.style.top = `${Math.max(8, y)}px`;
+    }
+
+    function setInfoMode(active) {
+      document.body.classList.toggle('info-mode', active);
+      infoButton.classList.toggle('active', active);
+      infoButton.setAttribute('aria-pressed', String(active));
+      if (!active) hideTooltip();
+    }
+
+    function toggleInfoMode() {
+      setInfoMode(!document.body.classList.contains('info-mode'));
+    }
+
+    infoButton.addEventListener('click', toggleInfoMode);
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        setInfoMode(false);
+      }
+    });
+
+    document.querySelectorAll('[data-info]').forEach((element) => {
+      element.addEventListener('click', (event) => {
+        if (!document.body.classList.contains('info-mode')) return;
+        event.stopPropagation();
+        showTooltip(element, event);
+      });
+
+      element.addEventListener('mouseenter', (event) => {
+        if (!document.body.classList.contains('info-mode')) return;
+        showTooltip(element, event);
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!event.target.closest('[data-info]')) {
+        hideTooltip();
+      }
+    });
+
+    window.addEventListener('resize', hideTooltip);
+  </script>
 </body>
 </html>
