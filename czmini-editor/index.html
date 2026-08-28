@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CZ-mini editor v0.1</title>
+  <title>CZ-mini editor v1.0</title>
   <link rel="icon" type="image/x-icon" href="./assets/favicon-DsVN0Pl2.ico">
   <link rel="shortcut icon" href="./assets/favicon-DsVN0Pl2.ico">
   <script>
@@ -13,8 +13,8 @@
     };
   </script>
   <script src="./vendor/webaudio-controls.js"></script>
-  <script type="module" crossorigin src="./assets/main-yxYVecRW.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/main-BrKOmpyZ.css">
+  <script type="module" crossorigin src="./assets/main-BekUCNGo.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/main-0tNW9myv.css">
 </head>
 <body>
   <div id="app">
@@ -238,6 +238,12 @@
       <!-- Row 4 -->
       <section class="box envelope-box" id="envelope-box">
         <div class="envelope-title-row">
+          <div class="copy-envelope-control">
+            <button id="copy-envelope-btn" class="copy-btn" type="button" aria-label="Copy current envelope to another slot">
+              <img src="./assets/copy.svg" alt="Copy" class="copy-icon" />
+            </button>
+            <div id="copy-envelope-menu" class="copy-envelope-menu" hidden></div>
+          </div>
           <span id="envelope-type-label" class="envelope-type-label">Pitch Envelope</span>
           <button id="rand-envelope-btn" class="rand-btn" type="button" aria-label="Randomize current envelope" data-info="Local control randomizer">
             <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABTElEQVR4AezWUU4DMQwEUOBkcDLgZHAz8KvUDzay192kVKpaZdrZZDKeJv7Yl6cbfx4BHieQncB79OZX4GcheIbd35EF+AjZZ+B5Ed7C5zUwjCwA4bevReB1cYBzbRtdB+Dn+eyXhhbwTHear07gJIgvd8cI8JgqBw0t4KW4E6A0mF3sBNCM7hDwvZo0tICX+k4ARroY8NIwFmloAY+pfHQC5LsXrMwE0GQ6HfBDcWYC6HCFAf/3AIcKbjfNnIAO12SAb71bzzMBFNbpgLcKbkUzAbZeh547ATSZTgd8rxANLeClvhNAhzMCvDSMRRpawGMqH50A+e4FK50AOlyTAb5XloYW8FLfCcBIpwNeGsYiDS3gMZWPLICN7jDfedlK6lUF0MWrXko1o/fMIXYWwN2teiHl4zp4tgMMwmtNZCdwrXqD7/0HGP7yZuIXAAD//4gU13AAAAAGSURBVAMASEtXQWAswwgAAAAASUVORK5CYII=" alt="Randomize" />
